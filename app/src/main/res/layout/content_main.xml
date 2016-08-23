@@ -71,4 +71,13 @@
         android:contentDescription="@string/random_button"
         android:src="@drawable/ic_refresh_black_48dp"
         android:tint="@color/buttonSelected"/>
+
+    <TextView
+        android:id="@+id/directionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/randomButton"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 </RelativeLayout>

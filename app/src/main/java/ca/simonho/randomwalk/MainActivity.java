@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton leftButton;
     ImageButton rightButton;
     ImageButton randomButton;
+    TextView directionText;
 
     HashMap<ImageButton, Boolean> buttonStates;
     Boolean newButtonState;
@@ -37,12 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Get references to buttons
+        //Get references
         forwardButton = (ImageButton) findViewById(R.id.forwardButton);
         backButton = (ImageButton) findViewById(R.id.backButton);
         leftButton = (ImageButton) findViewById(R.id.leftButton);
         rightButton = (ImageButton) findViewById(R.id.rightButton);
         randomButton = (ImageButton) findViewById(R.id.randomButton);
+        directionText = (TextView) findViewById(R.id.directionText);
 
         //Initialize list of user selected buttons
         selectedButtons = new ArrayList<>();
@@ -67,12 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void toggleButtonState(ImageButton button){
+        //Toggle the state of a button
         newButtonState = !buttonStates.get(button);
         buttonStates.put(button, newButtonState);
         setColour(button, newButtonState);
     }
 
     private void setColour(ImageButton button, Boolean newState){
+        //Set colour of the buttons based on their state
         if (newState){
             button.setColorFilter(getResources().getColor(R.color.buttonSelected));
         } else {
@@ -81,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showRandomDirection(final ImageButton button){
+        //Announce the randomly chosen direction
+        directionText.setText(getString(R.string.directionText, button.getContentDescription()));
+
         //Highlight the randomly chosen direction button
         button.setColorFilter(getResources().getColor(R.color.buttonChosen));
 
@@ -89,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 setColour(button, buttonStates.get(button));
+                //Reset the direction announce text
+                directionText.setText("");
             }
         }, directionShowDuration);
     }
@@ -151,16 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (selectedButtons.size() > 0){
                     randomlyChosenButton = selectedButtons.get((new Random()).nextInt(selectedButtons.size()));
 
-                    //Set chosen direction arrow colour
+                    //Announce the randomly picked direction
                     showRandomDirection(randomlyChosenButton);
-
-                    Log.d("Random direction: ", String.valueOf(getResources().getResourceEntryName(randomlyChosenButton.getId())));
                 }
-
-                for(ImageButton button:selectedButtons){
-                    Log.d("Selected: ", String.valueOf(getResources().getResourceEntryName(button.getId())));
-                }
-                Log.d("---","---");
                 break;
         }
     }
