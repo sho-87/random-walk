@@ -12,4 +12,5 @@ When you get to an intersection, or experience a moment of indecision, just do t
 2. Click the center button to randomly choose a direction
 3. Enjoy your life
 
+![App Logo](/images/logo.png)
 ![Image of Random Walk](/images/app.png)
