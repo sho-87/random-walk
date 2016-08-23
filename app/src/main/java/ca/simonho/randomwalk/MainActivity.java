@@ -131,15 +131,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 //Get randomly picked direction
-                randomlyChosenButton = selectedButtons.get((new Random()).nextInt(selectedButtons.size()));
+                if (selectedButtons.size() > 0){
+                    randomlyChosenButton = selectedButtons.get((new Random()).nextInt(selectedButtons.size()));
 
-                //Set chosen direction arrow colour
-                showRandomDirection(randomlyChosenButton);
+                    //Set chosen direction arrow colour
+                    showRandomDirection(randomlyChosenButton);
+
+                    Log.d("Random direction: ", String.valueOf(getResources().getResourceEntryName(randomlyChosenButton.getId())));
+                }
 
                 for(ImageButton button:selectedButtons){
                     Log.d("Selected: ", String.valueOf(getResources().getResourceEntryName(button.getId())));
                 }
-                Log.d("Random direction: ", String.valueOf(getResources().getResourceEntryName(randomlyChosenButton.getId())));
                 Log.d("---","---");
                 break;
         }
