@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Add icon to actionbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_walk);
+
         //Get references
         forwardButton = (ImageButton) findViewById(R.id.forwardButton);
         backButton = (ImageButton) findViewById(R.id.backButton);
