@@ -1,5 +1,6 @@
 package ca.simonho.randomwalk;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton leftButton;
     ImageButton rightButton;
     ImageButton randomButton;
+    Boolean newButtonState;
+    ArrayList<ImageButton> selectedButtons;
 
     HashMap<ImageButton, Boolean> buttonStates;
 
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leftButton = (ImageButton) findViewById(R.id.leftButton);
         rightButton = (ImageButton) findViewById(R.id.rightButton);
         randomButton = (ImageButton) findViewById(R.id.randomButton);
+
+        selectedButtons = new ArrayList<>();
 
         //Set initial button state
         buttonStates = new HashMap<>();
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void toggleButtonState(ImageButton button){
-        Boolean newButtonState = !buttonStates.get(button);
+        newButtonState = !buttonStates.get(button);
         buttonStates.put(button, newButtonState);
         setColour(button, newButtonState);
     }
@@ -107,16 +114,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toggleButtonState(rightButton);
                 break;
             case R.id.randomButton:
-                Log.d("click", "random button pushed");
+                selectedButtons.clear();
+
+                //Get all buttons that have been selected
+                for (HashMap.Entry<ImageButton, Boolean> entry : buttonStates.entrySet()) {
+                    if(entry.getKey() != randomButton & entry.getValue()){
+                        selectedButtons.add(entry.getKey());
+                    }
+                }
+
+                for(ImageButton button:selectedButtons){
+                    Log.d("Selected: ", String.valueOf(getResources().getResourceEntryName(button.getId())));
+                }
+                Log.d("---","---");
                 break;
         }
-
-        for (HashMap.Entry<ImageButton, Boolean> entry : buttonStates.entrySet()) {
-            Log.d("Click: ", String.valueOf(getResources().getResourceName(entry.getKey().getId())) + ": " + entry
-                    .getValue
-                    ());
-        }
-
-        Log.d("----------------------","--------------------");
     }
 }
