@@ -9,4 +9,7 @@
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
+
+    <color name="buttonSelected">#000000</color>
+    <color name="buttonNotSelected">#9f9f9f</color>
 </resources>
