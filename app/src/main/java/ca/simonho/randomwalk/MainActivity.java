@@ -1,6 +1,5 @@
 package ca.simonho.randomwalk;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +11,7 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,10 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton leftButton;
     ImageButton rightButton;
     ImageButton randomButton;
-    Boolean newButtonState;
-    ArrayList<ImageButton> selectedButtons;
 
     HashMap<ImageButton, Boolean> buttonStates;
+    Boolean newButtonState;
+    ArrayList<ImageButton> selectedButtons;
+    ImageButton randomlyChosenButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void showRandomDirection(ImageButton button){
+        button.setColorFilter(getResources().getColor(R.color.buttonChosen));
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,16 +120,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.randomButton:
                 selectedButtons.clear();
 
-                //Get all buttons that have been selected
                 for (HashMap.Entry<ImageButton, Boolean> entry : buttonStates.entrySet()) {
+                    //Reset button colour states each click
+                    setColour(entry.getKey(), entry.getValue());
+
+                    //Get all buttons that have been selected
                     if(entry.getKey() != randomButton & entry.getValue()){
                         selectedButtons.add(entry.getKey());
                     }
                 }
 
+                //Get randomly picked direction
+                randomlyChosenButton = selectedButtons.get((new Random()).nextInt(selectedButtons.size()));
+
+                //Set chosen direction arrow colour
+                showRandomDirection(randomlyChosenButton);
+
                 for(ImageButton button:selectedButtons){
                     Log.d("Selected: ", String.valueOf(getResources().getResourceEntryName(button.getId())));
                 }
+                Log.d("Random direction: ", String.valueOf(getResources().getResourceEntryName(randomlyChosenButton.getId())));
                 Log.d("---","---");
                 break;
         }

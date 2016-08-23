@@ -12,4 +12,5 @@
 
     <color name="buttonSelected">#000000</color>
     <color name="buttonNotSelected">#9f9f9f</color>
+    <color name="buttonChosen">#00e13c</color>
 </resources>
