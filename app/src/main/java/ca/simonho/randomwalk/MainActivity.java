@@ -1,6 +1,7 @@
 package ca.simonho.randomwalk;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<ImageButton> selectedButtons;
     ImageButton randomlyChosenButton;
 
+    Integer directionShowDuration = 5000;
+    Handler durationHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rightButton = (ImageButton) findViewById(R.id.rightButton);
         randomButton = (ImageButton) findViewById(R.id.randomButton);
 
+        //Initialize list of user selected buttons
         selectedButtons = new ArrayList<>();
+
+        //Initialize the handler for chosen direction display duration
+        durationHandler = new Handler();
 
         //Set initial button state
         buttonStates = new HashMap<>();
@@ -72,8 +80,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void showRandomDirection(ImageButton button){
+    private void showRandomDirection(final ImageButton button){
+        //Highlight the randomly chosen direction button
         button.setColorFilter(getResources().getColor(R.color.buttonChosen));
+
+        //Set button colour back to state based colour after a delay
+        durationHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setColour(button, buttonStates.get(button));
+            }
+        }, directionShowDuration);
     }
 
     @Override
