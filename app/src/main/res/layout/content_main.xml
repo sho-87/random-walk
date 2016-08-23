@@ -78,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/randomButton"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 </RelativeLayout>
