@@ -8,3 +8,4 @@ This is a very simple Android app that will randomly choose a walking direction 
 
 When you get to an intersection, or experience a moment of indecision, just select the possible walking directions in the app and it will randomly pick one for you!
 
+![Image of Random Walk](/images/app.png)
