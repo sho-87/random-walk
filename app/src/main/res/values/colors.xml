@@ -11,6 +11,6 @@
     <color name="colorDivider">#BDBDBD</color>
 
     <color name="buttonSelected">#000000</color>
-    <color name="buttonNotSelected">#9f9f9f</color>
+    <color name="buttonNotSelected">#d4d4d4</color>
     <color name="buttonChosen">#00e13c</color>
 </resources>
