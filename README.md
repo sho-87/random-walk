@@ -14,4 +14,4 @@ When you get to an intersection, or experience a moment of indecision, just do t
 
 <img style="vertical-align: top;" src="/images/logo.png">
 
-![Image of Random Walk](/images/app.png)
+<img style="vertical-align: top;" src="/images/app.png">
