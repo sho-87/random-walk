@@ -3,13 +3,15 @@ package ca.simonho.randomwalk;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton forwardButton;
     ImageButton backButton;
@@ -39,14 +41,23 @@ public class MainActivity extends AppCompatActivity {
         buttonStates.put(backButton, false);
         buttonStates.put(leftButton, true);
         buttonStates.put(rightButton, true);
+        buttonStates.put(randomButton, true);
 
-        //Set state based colour of each button
+        //Set initial state based colour and click listener for each button
         for (HashMap.Entry<ImageButton, Boolean> entry : buttonStates.entrySet()) {
             setColour(entry.getKey(), entry.getValue());
+
+            entry.getKey().setOnClickListener(this);
         }
     }
 
-    public void setColour(ImageButton button, Boolean newState){
+    private void toggleButtonState(ImageButton button){
+        Boolean newButtonState = !buttonStates.get(button);
+        buttonStates.put(button, newButtonState);
+        setColour(button, newButtonState);
+    }
+
+    private void setColour(ImageButton button, Boolean newState){
         if (newState){
             button.setColorFilter(getResources().getColor(R.color.buttonSelected));
         } else {
@@ -74,5 +85,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.forwardButton:
+                //Toggle the existing button state/colour
+                toggleButtonState(forwardButton);
+                break;
+            case R.id.backButton:
+                //Toggle the existing button state/colour
+                toggleButtonState(backButton);
+                break;
+            case R.id.leftButton:
+                //Toggle the existing button state/colour
+                toggleButtonState(leftButton);
+                break;
+            case R.id.rightButton:
+                //Toggle the existing button state/colour
+                toggleButtonState(rightButton);
+                break;
+            case R.id.randomButton:
+                Log.d("click", "random button pushed");
+                break;
+        }
+
+        for (HashMap.Entry<ImageButton, Boolean> entry : buttonStates.entrySet()) {
+            Log.d("Click: ", String.valueOf(getResources().getResourceName(entry.getKey().getId())) + ": " + entry
+                    .getValue
+                    ());
+        }
+
+        Log.d("----------------------","--------------------");
     }
 }
