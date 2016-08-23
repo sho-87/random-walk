@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showRandomDirection(final ImageButton button){
+        //Disable the random button for a while
+        randomButton.setEnabled(false);
+        setColour(randomButton, false);
+
         //Announce the randomly chosen direction
         directionText.setText(getString(R.string.directionText, button.getContentDescription()));
 
@@ -96,8 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 setColour(button, buttonStates.get(button));
+
                 //Reset the direction announce text
                 directionText.setText("");
+
+                //Re-enable the random button
+                randomButton.setEnabled(true);
+                setColour(randomButton, true);
             }
         }, directionShowDuration);
     }
