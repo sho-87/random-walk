@@ -1,5 +1,7 @@
 # Random Walk
 
+[![Build Status](https://travis-ci.org/sho-87/random-walk.svg)](https://travis-ci.org/sho-87/random-walk)
+
 **Ever wanted to go for a walk and not have to think about where you're going?**
 
 **Ever wanted to randomly explore an area without having to choose a walking direction?**
